@@ -1,0 +1,12 @@
+CREATE TABLE `test`.`project` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NULL,
+  `jobs` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `test`.`job` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `creationDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `price` DECIMAL(6,2) NULL,
+  `status` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
