@@ -5,7 +5,12 @@ const db = require('../config/db');
 exports.getJobs = (req, res) => {
   const sql = 'SELECT * FROM job';
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -17,7 +22,12 @@ exports.getJobs = (req, res) => {
 exports.getJob = (req, res) => {
   const sql = `SELECT * FROM job WHERE ID = ${req.params.id}`;
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -33,7 +43,12 @@ exports.addJob = (req, res) => {
     req.body.status.toLowerCase(),
   ];
   db.query(sql, [values], (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 201,
       data,
@@ -48,7 +63,12 @@ exports.updJob = (req, res) => {
   const sql = `UPDATE job SET status = '${status}' WHERE id = ${id};`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -61,7 +81,12 @@ exports.delJob = (req, res) => {
   const sql = `DELETE FROM job WHERE ID = ${req.params.id}`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -79,7 +104,12 @@ exports.filterJob = (req, res) => {
   WHERE  status IN ('${status.toLowerCase()}')`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -106,7 +136,12 @@ exports.orderJob = (req, res) => {
   }
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,

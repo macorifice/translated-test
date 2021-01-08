@@ -3,7 +3,12 @@ const db = require('../config/db');
 exports.getProjects = (req, res) => {
   const sql = 'SELECT * FROM project';
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -16,7 +21,12 @@ exports.getProject = (req, res) => {
   const sql = `SELECT * FROM project WHERE ID = ${req.params.id}`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -38,7 +48,12 @@ exports.addProject = (req, res) => {
       req.body.jobs,
     ];
     db.query(sql, [values], (err, data) => {
-      if (err) throw err;
+      if (err) {
+        res.json({
+          status: 400,
+          message: err,
+        });
+      }
       res.json({
         status: 201,
         data,
@@ -54,7 +69,12 @@ exports.updProject = (req, res) => {
   const sql = `UPDATE project SET title = '${title}' WHERE id = ${id};`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,
@@ -67,7 +87,12 @@ exports.delProject = (req, res) => {
   const sql = `DELETE FROM project WHERE ID = ${req.params.id};`;
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      res.json({
+        status: 400,
+        message: err,
+      });
+    }
     res.json({
       status: 200,
       data,

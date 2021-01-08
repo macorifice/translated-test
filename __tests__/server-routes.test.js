@@ -1,69 +1,91 @@
 /* eslint-disable no-undef */
-const express = require('express');
 const request = require('supertest');
+const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.json());
+
+describe('Testing server ping', () => {
+  test('It should respond with a message', () => {
+    request(app)
+      .get('/')
+      .expect(200);
+  });
+});
+
+describe('Testing server ping', () => {
+  test('It should respond with a message', () => {
+    request(app)
+      .get('/')
+      .expect(200);
+  });
+});
+
 describe('Testing server routes project', () => {
-  it('should create a new project', async () => {
-    const res = await request(app)
+  it('shouldn t create a new project', async () => {
+    request(app)
       .post('/project')
       .send({
-        id: 1,
-        title: 'test title',
+        title: 'test',
+        jobs: '',
+      })
+      .expect(400);
+  });
+
+  it('should create a new project', async () => {
+    request(app)
+      .post('/project')
+      .send({
+        title: 'test',
         jobs: 'test job',
-      });
-    expect(res.statusCode).toEqual(201);
+      })
+      .expect(201);
   });
 
   it('should update project', async () => {
-    const res = await request(app)
+    request(app)
       .put('/project/1')
       .send({
         id: 1,
         title: 'test title',
-      });
-    expect(res.statusCode).toEqual(200);
+      })
+      .expect(200);
   });
 
   it('should delete project', async () => {
-    const res = await request(app)
+    request(app)
       .delete('/project/1')
-      .send({
-        id: 1,
-      });
-    expect(res.statusCode).toEqual(200);
+      .expect(200);
   });
 });
 
 describe('Testing server routes job', () => {
   it('should create a new job', async () => {
-    const res = await request(app)
+    request(app)
       .post('/job')
       .send({
         id: 1,
         price: 100,
         status: 'in progress',
-      });
-    expect(res.statusCode).toEqual(201);
+      })
+      .expect(201);
   });
 
   it('should update job', async () => {
-    const res = await request(app)
+    request(app)
       .put('/job/1')
       .send({
         id: 1,
         status: 'delivered',
-      });
-    expect(res.statusCode).toEqual(200);
+      })
+      .expect(200);
   });
 
   it('should delete job', async () => {
-    const res = await request(app)
+    request(app)
       .delete('/job/1')
-      .send({
-        id: 1,
-      });
-    expect(res.statusCode).toEqual(200);
+      .expect(200);
   });
 });
