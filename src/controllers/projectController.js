@@ -13,9 +13,8 @@ exports.getProjects = (req, res) => {
 };
 
 exports.getProject = (req, res) => {
-  const { id } = req.body;
+  const sql = `SELECT * FROM project WHERE ID = ${req.params.id}`;
 
-  const sql = `SELECT * FROM project WHERE ID = ${id}`;
   db.query(sql, (err, data) => {
     if (err) throw err;
     res.json({
@@ -52,7 +51,7 @@ exports.addProject = (req, res) => {
 exports.updProject = (req, res) => {
   const { id, title } = req.body;
 
-  const sql = `UPDATE project SET TITLE = ${title}  WHERE ID = ${id};`;
+  const sql = `UPDATE project SET title = '${title}' WHERE id = ${id};`;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -65,9 +64,7 @@ exports.updProject = (req, res) => {
 };
 
 exports.delProject = (req, res) => {
-  const { id } = req.body;
-
-  const sql = `DELETE FROM project WHERE ID = ${id};`;
+  const sql = `DELETE FROM project WHERE ID = ${req.params.id};`;
 
   db.query(sql, (err, data) => {
     if (err) throw err;

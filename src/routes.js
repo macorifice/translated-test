@@ -4,28 +4,28 @@ const router = express.Router();
 const projectController = require('./controllers/projectController');
 const jobController = require('./controllers/jobController');
 
-router.get('/project', projectController.getProjects);
+router.get('/projects', projectController.getProjects); /**/
 
-router.get('/project/:id', projectController.getProject);
+router.get('/project/:id', projectController.getProject); /**/
 
-router.post('/project', projectController.addProject);
+router.post('/project', projectController.addProject); /**/
 
-router.put('/project', projectController.updProject);
+router.put('/project/:id', projectController.updProject); /**/
 
-router.delete('/project', projectController.delProject);
+router.delete('/project/:id', projectController.delProject); /**/
 
-router.get('/job', jobController.getJobs);
+router.get('/jobs', jobController.getJobs); /**/
 
-router.get('/job/:id', jobController.getJob);
+router.get('/job/:id', jobController.getJob); /**/
 
-router.post('/job', jobController.addJob);
+router.post('/job', jobController.addJob); /**/
 
-router.put('/job/:id', jobController.updJob);
+router.put('/job/:id', jobController.updJob); /**/
 
-router.delete('/job', jobController.delJob);
+router.delete('/job/:id', jobController.delJob); /**/
 
-router.post('/filterJob', jobController.filterJob);
+router.post('/filterJob', jobController.filterJob); /**/
 
-router.post('/orderJob', jobController.orderJob);
+router.post('/orderJob', jobController.orderJob); /**/
 
 module.exports = router;

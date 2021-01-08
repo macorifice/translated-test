@@ -15,9 +15,7 @@ exports.getJobs = (req, res) => {
 };
 
 exports.getJob = (req, res) => {
-  const { id } = req.body;
-
-  const sql = `SELECT * FROM job WHERE ID = ${id}`;
+  const sql = `SELECT * FROM job WHERE ID = ${req.params.id}`;
   db.query(sql, (err, data) => {
     if (err) throw err;
     res.json({
@@ -47,7 +45,7 @@ exports.addJob = (req, res) => {
 exports.updJob = (req, res) => {
   const { id, status } = req.body;
 
-  const sql = `UPDATE job SET STATUS = ${status}  WHERE ID = ${id};`;
+  const sql = `UPDATE job SET status = '${status}' WHERE id = ${id};`;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -60,9 +58,7 @@ exports.updJob = (req, res) => {
 };
 
 exports.delJob = (req, res) => {
-  const { id } = req.body;
-
-  const sql = `DELETE FROM job WHERE ID = ${id};`;
+  const sql = `DELETE FROM job WHERE ID = ${req.params.id}`;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -78,9 +74,9 @@ exports.filterJob = (req, res) => {
   const { status } = req.body;
 
   const sql = `
-  SELECT id, creationDate, price, status
+  SELECT *
   FROM   job
-  WHERE  STATUS IN (${status.toLowerCase()}`;
+  WHERE  status IN ('${status.toLowerCase()}')`;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
